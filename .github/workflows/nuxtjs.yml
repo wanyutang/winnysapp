@@ -46,6 +46,13 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
+      - name: Install dependencies
+        run: |
+          if [ "${{ steps.detect-package-manager.outputs.manager }}" == "npm" ]; then
+            npm install
+          elif [ "${{ steps.detect-package-manager.outputs.manager }}" == "yarn" ]; then
+            yarn install
+          fi
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
