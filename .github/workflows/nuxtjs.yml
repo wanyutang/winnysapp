@@ -80,7 +80,7 @@ jobs:
           echo "Package Manager: ${{ steps.detect-package-manager.outputs.manager }}"
           echo "Command: ${{ steps.detect-package-manager.outputs.command }}"
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: ${{ steps.detect-package-manager.outputs.manager }} --legacy-peer-deps ${{ steps.detect-package-manager.outputs.command }}
       - name: Static HTML export with Nuxt
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
       - name: Upload artifact
