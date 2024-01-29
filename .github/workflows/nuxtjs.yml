@@ -51,7 +51,7 @@ jobs:
           if [ "${{ steps.detect-package-manager.outputs.manager }}" == "npm" ]; then
             npm --legacy-peer-deps install
           elif [ "${{ steps.detect-package-manager.outputs.manager }}" == "yarn" ]; then
-            yarn install
+            yarn --legacy-peer-deps install
           fi
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -75,6 +75,10 @@ jobs:
           key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
           restore-keys: |
             ${{ runner.os }}-nuxt-build-
+      - name: Print package manager and command
+        run: |
+          echo "Package Manager: ${{ steps.detect-package-manager.outputs.manager }}"
+          echo "Command: ${{ steps.detect-package-manager.outputs.command }}"
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Static HTML export with Nuxt
