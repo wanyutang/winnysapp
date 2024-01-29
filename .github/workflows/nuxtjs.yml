@@ -49,7 +49,7 @@ jobs:
       - name: Install dependencies
         run: |
           if [ "${{ steps.detect-package-manager.outputs.manager }}" == "npm" ]; then
-            npm install
+            npm --legacy-peer-deps install
           elif [ "${{ steps.detect-package-manager.outputs.manager }}" == "yarn" ]; then
             yarn install
           fi
